@@ -1,6 +1,6 @@
 import type { Pokemon, PokemonListResponse } from "@/types/pokemon";
 
-const API = process.env.API_URL as string;
+const API = process.env.NEXT_PUBLIC_API_URL as string;
 
 async function fetchJson<T>(
   url: string,
@@ -17,12 +17,27 @@ async function fetchJson<T>(
 export async function getPokemonPage(
   page = 1,
   limit = 12
-): Promise<PokemonListResponse> {
+): Promise<{ id: number; name: string; image: string | null }[]> {
   const offset = (page - 1) * limit;
-  return fetchJson<PokemonListResponse>(
+  const list = await fetchJson<PokemonListResponse>(
     `${API}/pokemon?limit=${limit}&offset=${offset}`,
     { next: { revalidate: 60 } }
   );
+
+  const pokemons = await Promise.all(
+    list.results.map(async ({ name }) => {
+      const data = await fetchJson<Pokemon>(`${API}/pokemon/${name}`, {
+        next: { revalidate: 60 },
+      });
+      return {
+        id: data.id,
+        name: data.name,
+        image: data.sprites.front_default || null,
+      };
+    })
+  );
+
+  return pokemons;
 }
 
 export async function getPokemon(

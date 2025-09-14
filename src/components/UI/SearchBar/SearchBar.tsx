@@ -1,40 +1,44 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import Image from "next/image";
+import { useDebounce } from "@/components/hooks/useDebounce";
 import "./searchBar.scss";
 
-type Props = {
-  onChange?: (value: string) => void;
-  onSubmit?: (value: string) => void;
-  delay?: number;
-};
-
-export default function SearchBar({
-  onChange,
-  onSubmit,
-  delay = 300,
-}: Props) {
+export default function SearchBar({ delay = 3000 }) {
   const [value, setValue] = useState("");
-  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const debouncedValue = useDebounce(value.trim().toLowerCase(), delay);
+
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
 
   useEffect(() => {
-    if (!onChange) return;
-    if (timer.current) clearTimeout(timer.current);
+    const params = new URLSearchParams(searchParams.toString());
 
-    timer.current = setTimeout(() => {
-      onChange(value.trim());
-    }, delay);
+    if (debouncedValue) {
+      params.set("search", debouncedValue);
+      params.delete("page");
+    } else {
+      params.delete("search");
+    }
 
-    return () => {
-      if (timer.current) clearTimeout(timer.current);
-    };
-  }, [value, delay, onChange]);
+    router.push(`${pathname}?${params.toString()}`);
+  }, [debouncedValue]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit?.(value.trim());
   };
+
+  const clear = () => {
+    setValue("");
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete("search");
+    router.push(`${pathname}?${params.toString()}`);
+  };
+
+  const hasText = useMemo(() => value.length > 0, [value]);
 
   return (
     <form className="form" onSubmit={handleSubmit}>

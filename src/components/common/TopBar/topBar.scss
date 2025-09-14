@@ -1,7 +1,13 @@
+@import "../../../styles/variables.scss";
+
 .topbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media (max-width: $tablet-width) {
+    flex-direction: column;
+  }
 }
 
 .topbar__info {

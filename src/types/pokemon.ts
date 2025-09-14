@@ -6,6 +6,7 @@ export type Pokemon = {
   types: { slot: number; type: { name: string } }[];
   stats: { base_stat: number; stat: { name: string } }[];
   abilities: { ability: { name: string } }[];
+  image: string | null;
   sprites: {
     front_default: string | null;
   };
