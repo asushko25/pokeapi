@@ -1,0 +1,14 @@
+@import "../../../styles/variables.scss";
+
+.loader-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.loader-wrapper svg {
+  height: 80px;
+  width: 80px;
+  color: $loader-color;
+}

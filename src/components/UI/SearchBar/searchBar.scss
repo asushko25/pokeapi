@@ -1,0 +1,52 @@
+@import "../../../styles/variables.scss";
+
+.form {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 300px;
+  border: 1px solid transparent;
+  border-radius: 20px;
+  padding: 6px 10px 6px 32px;
+
+  background: $color-bg;
+  background-clip: padding-box;
+
+  transition: all 0.3s ease;
+
+  background-image: 
+    linear-gradient($color-bg, $color-bg),
+    linear-gradient(90deg, #e1ff00, #00c3ff);
+
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+
+  &:focus-within {
+    border: 1px solid transparent;
+    background-image: 
+      linear-gradient($color-bg, $color-bg),
+      linear-gradient(90deg, #e1ff00, #00c3ff);
+  }
+}
+
+.search__icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.6;
+}
+
+.search__input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  color: $color-text;
+
+  &::placeholder {
+    color: $color-placeholder;
+  }
+}

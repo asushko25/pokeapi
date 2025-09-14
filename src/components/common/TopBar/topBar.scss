@@ -1,0 +1,24 @@
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.topbar__info {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.topbar__title {
+  font-size: 24px;
+  font-weight: 700;
+  color: black;
+  letter-spacing: 1px;
+}
+
+.topbar__search {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
