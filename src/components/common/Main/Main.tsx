@@ -21,16 +21,7 @@ export default async function Main({ searchParams }: Props) {
   const totalPages = 8
 
   if (filteredPokemons.length === 0) {
-    return (
-      <>
-        <div className="main__cards">
-          {Array.from({ length: limit }).map((_, i) => (
-            <div key={i} className="main__card skeleton-card"></div>
-          ))}
-        </div>
-        <div className="not-found">Not found Pokemon</div>
-      </>
-    )
+    return <div className="not-found">Not found Pokemon</div>
   }
 
   return (
