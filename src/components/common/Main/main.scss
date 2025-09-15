@@ -55,3 +55,23 @@
   margin-top: 40px;
   color: $main-color;
 }
+
+.skeleton-card {
+  width: 140px;
+  height: 180px;
+  border-radius: 12px;
+  background: $color-bg;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    background-color: $color-bg;
+  }
+  50% {
+    background-color: $color-bg;
+  }
+  100% {
+    background-color: $color-bg;
+  }
+}

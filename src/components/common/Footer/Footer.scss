@@ -5,31 +5,3 @@
   justify-content: center;
   padding: 32px;
 }
-
-.pagination {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
-  &__page,
-  &__arrow {
-    padding: 8px 12px;
-    border-radius: 8px;
-    text-decoration: none;
-    background-color: $color-bg;
-    color: $color-text;
-    font-weight: 500;
-    transition: background-color 0.2s;
-  }
-
-  &__page.active {
-    background-color: $color-active-page;
-    color: $color-bg;
-    font-weight: bold;
-  }
-
-  &__dots {
-    padding: 8px 12px;
-    color: $color-muted;
-  }
-}

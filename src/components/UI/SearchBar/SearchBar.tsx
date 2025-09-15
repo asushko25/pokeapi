@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import Image from 'next/image';
 import { useDebounce } from '@/components/hooks/useDebounce';
-import Loader from '@/components/UI/Loader/Loader.tsx';
+import Loader from '@/components/UI/Loader/Loader';
 import './searchBar.scss';
 
 export default function SearchBar({ delay = 3000 }) {
