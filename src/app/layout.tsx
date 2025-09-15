@@ -11,20 +11,19 @@ const roboto = Roboto({
 export const metadata: Metadata = {
   title: "Pokemon Browser",
   description: "App for browsing Pokemons",
+  icons: {
+    icon: "/pikachu.ico",
+  },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="icon" href="/pikachu.ico" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </head>
-      <body className={roboto.variable}>
+    <html lang="en" className={roboto.variable} >
+      <body>
         {children}
       </body>
     </html>

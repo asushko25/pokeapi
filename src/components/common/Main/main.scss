@@ -47,3 +47,11 @@
     text-transform: capitalize;
   }
 }
+
+.not-found {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 500;
+  margin-top: 40px;
+  color: $main-color;
+}

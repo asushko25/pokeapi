@@ -1,13 +1,16 @@
-"use client";
+'use client';
 
-import { useState, useEffect, useMemo } from "react";
-import { useRouter, useSearchParams, usePathname } from "next/navigation";
-import Image from "next/image";
-import { useDebounce } from "@/components/hooks/useDebounce";
-import "./searchBar.scss";
+import { useState, useEffect } from 'react';
+import { useRouter, useSearchParams, usePathname } from 'next/navigation';
+import Image from 'next/image';
+import { useDebounce } from '@/components/hooks/useDebounce';
+import Loader from '@/components/UI/Loader/Loader.tsx';
+import './searchBar.scss';
 
 export default function SearchBar({ delay = 3000 }) {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
   const debouncedValue = useDebounce(value.trim().toLowerCase(), delay);
 
   const router = useRouter();
@@ -15,16 +18,21 @@ export default function SearchBar({ delay = 3000 }) {
   const pathname = usePathname();
 
   useEffect(() => {
+    setIsLoading(true);
+  }, [value]);
+
+  useEffect(() => {
     const params = new URLSearchParams(searchParams.toString());
 
     if (debouncedValue) {
-      params.set("search", debouncedValue);
-      params.delete("page");
+      params.set('search', debouncedValue);
+      params.delete('page');
     } else {
-      params.delete("search");
+      params.delete('search');
     }
 
     router.push(`${pathname}?${params.toString()}`);
+    setIsLoading(false);
   }, [debouncedValue]);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -32,27 +40,30 @@ export default function SearchBar({ delay = 3000 }) {
   };
 
   const clear = () => {
-    setValue("");
+    setValue('');
+    setIsLoading(true); 
     const params = new URLSearchParams(searchParams.toString());
-    params.delete("search");
+    params.delete('search');
     router.push(`${pathname}?${params.toString()}`);
   };
 
-  const hasText = useMemo(() => value.length > 0, [value]);
-
   return (
-    <form className="form" onSubmit={handleSubmit}>
-      <span className="search__icon">
-        <Image src="/search.svg" alt="search icon" width={18} height={18} />
+    <form className='form' onSubmit={handleSubmit}>
+      <span className='search__icon'>
+        <Image src='/search.svg' alt='search icon' width={18} height={18} />
       </span>
 
       <input
-        className="search__input"
-        type="text"
+        className='search__input'
+        type='text'
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        placeholder="Search by name"
+        placeholder='Search by name'
       />
+
+      {isLoading && <Loader />}
+
+      
     </form>
   );
 }

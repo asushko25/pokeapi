@@ -1,14 +1,27 @@
-@import "../../../styles/variables.scss";
+@import '../../../styles/variables.scss';
 
 .loader-wrapper {
   display: flex;
-  justify-content: center;
   align-items: center;
-  height: 100vh;
-}
+  justify-content: center;
 
-.loader-wrapper svg {
-  height: 80px;
-  width: 80px;
-  color: $loader-color;
+  &.fullscreen {
+    height: 100vh;
+
+    svg {
+      width: 80px;
+      height: 80px;
+      color: $loader-color;
+    }
+  }
+
+  &.inline {
+    margin-left: 8px;
+
+    svg {
+      width: 18px;
+      height: 18px;
+      color: $loader-color;
+    }
+  }
 }
