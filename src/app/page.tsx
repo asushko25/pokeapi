@@ -1,6 +1,6 @@
 import TopBar from "@/components/common/TopBar/TopBar";
 import Footer from "@/components/common/Footer/Footer";
-import Loader from "@/components/UI/Loader/Loader.tsx";
+import Loader from "@/components/UI/Loader/Loader";
 import { Suspense } from "react";
 import Main from "@/components/common/Main/Main";
 
