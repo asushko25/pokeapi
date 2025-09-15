@@ -1,4 +1,4 @@
-import type { Pokemon, PokemonListResponse } from "@/types/pokemon";
+import type { Pokemon, PokemonListResponse, PokemonPreview } from "@/types/pokemon";
 
 const API = process.env.NEXT_PUBLIC_API_URL as string;
 
@@ -17,14 +17,14 @@ async function fetchJson<T>(
 export async function getPokemonPage(
   page = 1,
   limit = 12
-): Promise<{ id: number; name: string; image: string | null }[]> {
+): Promise<PokemonPreview[]> {
   const offset = (page - 1) * limit;
   const list = await fetchJson<PokemonListResponse>(
     `${API}/pokemon?limit=${limit}&offset=${offset}`,
     { next: { revalidate: 60 } }
   );
 
-  const pokemons = await Promise.all(
+  const pokemons: PokemonPreview[] = await Promise.all(
     list.results.map(async ({ name }) => {
       const data = await fetchJson<Pokemon>(`${API}/pokemon/${name}`, {
         next: { revalidate: 60 },

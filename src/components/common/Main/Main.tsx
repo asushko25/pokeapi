@@ -1,15 +1,15 @@
-import { getPokemonPage } from '@/lib/pokeapi';
-import PokemonList from '@/components/common/PokemonList/PokemonList';
-import './main.scss';
+import { getPokemonPage } from "@/lib/pokeapi";
+import PokemonList from "@/components/common/PokemonList/PokemonList";
+import "./main.scss";
 
 type Props = {
-  searchParams: { page?: string; search?: string };
+  searchParams?: Record<string, string | string[] | undefined>;
 };
 
 export default async function Main({ searchParams }: Props) {
-  const page = parseInt(searchParams.page || '1', 10);
+  const page = parseInt((searchParams?.page as string) || "1", 10);
   const limit = 12;
-  const search = (searchParams.search || '').toLowerCase();
+  const search = ((searchParams?.search as string) || "").toLowerCase();
 
   const allPokemons = await getPokemonPage(page, limit);
 
@@ -18,11 +18,7 @@ export default async function Main({ searchParams }: Props) {
   );
 
   if (filteredPokemons.length === 0) {
-    return (
-      <div className='not-found'>
-        Not found Pokemon
-      </div>
-    );
+    return <div className="not-found">Not found Pokemon</div>;
   }
 
   return <PokemonList pokemons={filteredPokemons} />;

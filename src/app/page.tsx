@@ -4,12 +4,18 @@ import Loader from "@/components/UI/Loader/Loader.tsx";
 import { Suspense } from "react";
 import Main from "@/components/common/Main/Main";
 
-export default function Home({ searchParams }: { searchParams: { page?: string; search?: string } }) {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const params = await searchParams;
+
   return (
     <>
       <TopBar />
       <Suspense fallback={<Loader />}>
-        <Main searchParams={searchParams} />
+        <Main searchParams={params} />
       </Suspense>
       <Footer />
     </>

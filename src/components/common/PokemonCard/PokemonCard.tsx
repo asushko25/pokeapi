@@ -18,7 +18,7 @@ const PokemonCard = React.memo(function PokemonCard({ pokemon }: Props) {
       <div className='pokemon-card__header'>
         {pokemon.sprites && (
           <Image
-            src={pokemon.sprites.front_default}
+            src={pokemon.sprites.front_default!}
             alt={pokemon.name}
             width={120}
             height={120}

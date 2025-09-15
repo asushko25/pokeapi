@@ -24,4 +24,9 @@ export type PokemonListResponse = {
   results: PokemonListItem[];
 };
 
+export type PokemonPreview = {
+  id: number;
+  name: string;
+  image: string | null;
+};
 
