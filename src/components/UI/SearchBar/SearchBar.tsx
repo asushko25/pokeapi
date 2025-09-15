@@ -62,8 +62,6 @@ export default function SearchBar({ delay = 3000 }) {
       />
 
       {isLoading && <Loader />}
-
-      
     </form>
   );
 }
