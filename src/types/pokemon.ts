@@ -29,4 +29,3 @@ export type PokemonPreview = {
   name: string;
   image: string | null;
 };
-

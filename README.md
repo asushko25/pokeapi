@@ -7,6 +7,7 @@ A **Next.js + TypeScript** project that uses the public Pokemon API to display P
 **Live Demo:** https://pokemon-browser-tau.vercel.app/
 
 ### 1. Clone the repository
+
 ```bash
 git clone https://github.com/asushko25/pokeapi.git
 cd pokeapi
@@ -20,3 +21,4 @@ pnpm dev
 The app will be available at:
 http://localhost:3000
 
+```

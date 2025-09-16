@@ -1,11 +1,15 @@
-'use client';
+"use client";
 
-import { PokemonPreview } from '@/types/pokemon';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useMemo } from 'react';
+import { PokemonPreview } from "@/types/pokemon";
+import Image from "next/image";
+import Link from "next/link";
+import { useMemo } from "react";
 
-export default function PokemonList({ pokemons }: { pokemons: PokemonPreview[] }) {
+export default function PokemonList({
+  pokemons,
+}: {
+  pokemons: PokemonPreview[];
+}) {
   const renderedPokemons = useMemo(
     () =>
       pokemons.map((pokemon) => (

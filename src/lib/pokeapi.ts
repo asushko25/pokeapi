@@ -1,11 +1,12 @@
-import type { Pokemon, PokemonListResponse, PokemonPreview } from "@/types/pokemon";
+import type {
+  Pokemon,
+  PokemonListResponse,
+  PokemonPreview,
+} from "@/types/pokemon";
 
 const API = process.env.NEXT_PUBLIC_API_URL as string;
 
-async function fetchJson<T>(
-  url: string,
-  init?: RequestInit
-): Promise<T> {
+async function fetchJson<T>(url: string, init?: RequestInit): Promise<T> {
   const res = await fetch(url, init);
   if (!res.ok) {
     const msg = `Fetch failed ${res.status} ${res.statusText} for ${url}`;
@@ -40,9 +41,7 @@ export async function getPokemonPage(
   return pokemons;
 }
 
-export async function getPokemon(
-  idOrName: number | string
-): Promise<Pokemon> {
+export async function getPokemon(idOrName: number | string): Promise<Pokemon> {
   return fetchJson<Pokemon>(`${API}/pokemon/${idOrName}`, {
     cache: "no-store",
   });

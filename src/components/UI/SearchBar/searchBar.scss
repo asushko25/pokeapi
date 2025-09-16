@@ -15,8 +15,7 @@
 
   transition: all 0.3s ease;
 
-  background-image: 
-    linear-gradient($color-bg, $color-bg),
+  background-image: linear-gradient($color-bg, $color-bg),
     linear-gradient(90deg, #e1ff00, #00c3ff);
 
   background-origin: border-box;
@@ -24,8 +23,7 @@
 
   &:focus-within {
     border: 1px solid transparent;
-    background-image: 
-      linear-gradient($color-bg, $color-bg),
+    background-image: linear-gradient($color-bg, $color-bg),
       linear-gradient(90deg, #e1ff00, #00c3ff);
   }
 }

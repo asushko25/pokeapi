@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { useRouter, useSearchParams, usePathname } from 'next/navigation';
-import Image from 'next/image';
-import { useDebounce } from '@/components/hooks/useDebounce';
-import Loader from '@/components/UI/Loader/Loader';
-import './searchBar.scss';
+import { useState, useEffect } from "react";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import Image from "next/image";
+import { useDebounce } from "@/components/hooks/useDebounce";
+import Loader from "@/components/UI/Loader/Loader";
+import "./searchBar.scss";
 
 export default function SearchBar({ delay = 3000 }) {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const debouncedValue = useDebounce(value.trim().toLowerCase(), delay);
@@ -25,10 +25,10 @@ export default function SearchBar({ delay = 3000 }) {
     const params = new URLSearchParams(searchParams.toString());
 
     if (debouncedValue) {
-      params.set('search', debouncedValue);
-      params.delete('page');
+      params.set("search", debouncedValue);
+      params.delete("page");
     } else {
-      params.delete('search');
+      params.delete("search");
     }
 
     router.push(`${pathname}?${params.toString()}`);
@@ -40,25 +40,25 @@ export default function SearchBar({ delay = 3000 }) {
   };
 
   const clear = () => {
-    setValue('');
-    setIsLoading(true); 
+    setValue("");
+    setIsLoading(true);
     const params = new URLSearchParams(searchParams.toString());
-    params.delete('search');
+    params.delete("search");
     router.push(`${pathname}?${params.toString()}`);
   };
 
   return (
-    <form className='form' onSubmit={handleSubmit}>
-      <span className='search__icon'>
-        <Image src='/search.svg' alt='search icon' width={18} height={18} />
+    <form className="form" onSubmit={handleSubmit}>
+      <span className="search__icon">
+        <Image src="/search.svg" alt="search icon" width={18} height={18} />
       </span>
 
       <input
-        className='search__input'
-        type='text'
+        className="search__input"
+        type="text"
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        placeholder='Search by name'
+        placeholder="Search by name"
       />
 
       {isLoading && <Loader />}
